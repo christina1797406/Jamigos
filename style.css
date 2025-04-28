@@ -14,12 +14,16 @@ body {
   overflow: hidden;
 }
 
+.purple-dot {
+  color: #800080; /* Purple color */
+}
+
 /* Sidebar */
 .sidebar {
   width: 200px;
   background-color: #1e1e1e;
   padding: 20px;
-  flex-shrink: 0;
+  flex-shrink: 2;
 }
 
 .sidebar .logo {
@@ -37,7 +41,7 @@ body {
 }
 
 .sidebar nav ul li:hover {
-  color: #1db954;
+  color: #800080;
 }
 
 /* Main area */
@@ -105,7 +109,7 @@ body {
   width: 200px;
   background-color: #1e1e1e;
   padding: 20px;
-  flex-shrink: 0;
+  flex-shrink: 1;
 }
 
 .rightbar h3 {
@@ -124,8 +128,8 @@ body {
   margin-top: 20px;
   padding: 10px;
   width: 100%;
-  background-color: #1db954;
-  color: #fff;
+  background-color: #800080;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -159,7 +163,7 @@ body {
 .controls button {
   background: none;
   border: none;
-  color: #fff;
+  color: #ffffff;
   font-size: 24px;
   cursor: pointer;
 }
@@ -177,3 +181,39 @@ body {
     right: 0;
   }
 }
+
+.toast {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 10px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* Streak */
+.streak {
+  background-color: #1db954;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
