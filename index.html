@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jamigos Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="logo">Jamigos</h2>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>Browse</li>
+        <li>My Playlists</li>
+        <li>Friends' Activity</li>
+        <li>Now Playing</li>
+        <li>Settings</li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <div class="main">
+
+    <!-- Top navbar -->
+    <header class="topbar">
+      <input type="text" placeholder="Search for songs, artists..." class="search-input">
+      <div class="user-profile">
+        <img src="https://i.pravatar.cc/40" alt="User Profile">
+      </div>
+    </header>
+
+    <!-- Dashboard content -->
+    <section class="content">
+      <h1>Hello, Jammer!</h1>
+
+      <div class="section">
+        <h2>Recommended for You</h2>
+        <div class="card-container" id="recommendations"></div>
+      </div>
+
+      <div class="section">
+        <h2>Your Playlists</h2>
+        <div class="card-container" id="playlists"></div>
+      </div>
+
+      <div class="section">
+        <h2>Trending Among Friends</h2>
+        <div class="card-container" id="trending"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Right sidebar (optional) -->
+  <aside class="rightbar">
+    <h3>Friends Activity</h3>
+    <ul id="friends-activity">
+      <li>Sarah is listening to Taylor Swift</li>
+      <li>Jake is listening to The Weeknd</li>
+      <li>Emily is listening to Drake</li>
+    </ul>
+    <button class="invite-btn">Invite Friends</button>
+  </aside>
+
+  <!-- Music Player -->
+  <footer class="player">
+    <div class="track-info">
+      <img src="https://via.placeholder.com/50" alt="Album Art">
+      <div>
+        <div class="track-title">Song Name</div>
+        <div class="track-artist">Artist</div>
+      </div>
+    </div>
+    <div class="controls">
+      <button onclick="prevSong()">⏮️</button>
+      <button onclick="togglePlay()">▶️</button>
+      <button onclick="nextSong()">⏭️</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
