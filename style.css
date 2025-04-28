@@ -1,0 +1,179 @@
+/* Reset basic */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  font-family: 'Arial', sans-serif;
+  background-color: #121212;
+  color: #fff;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  background-color: #1e1e1e;
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+.sidebar .logo {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+}
+
+.sidebar nav ul li {
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.sidebar nav ul li:hover {
+  color: #1db954;
+}
+
+/* Main area */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background-color: #1e1e1e;
+}
+
+.search-input {
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  width: 50%;
+}
+
+.user-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.card-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.card {
+  background-color: #282828;
+  padding: 20px;
+  border-radius: 10px;
+  width: 150px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: #333;
+}
+
+/* Right Sidebar */
+.rightbar {
+  width: 200px;
+  background-color: #1e1e1e;
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+.rightbar h3 {
+  margin-bottom: 20px;
+}
+
+.rightbar ul {
+  list-style: none;
+}
+
+.rightbar li {
+  padding: 5px 0;
+}
+
+.invite-btn {
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  background-color: #1db954;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Music Player */
+.player {
+  position: fixed;
+  bottom: 0;
+  left: 200px;
+  right: 200px;
+  background-color: #181818;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.track-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sidebar, .rightbar {
+    display: none;
+  }
+  .topbar .search-input {
+    width: 70%;
+  }
+  .player {
+    left: 0;
+    right: 0;
+  }
+}
