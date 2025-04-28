@@ -65,7 +65,7 @@ body {
   border-radius: 20px;
   border: none;
   outline: none;
-  width: 50%;
+  width: 30%;
 }
 
 .user-profile img {
@@ -215,5 +215,38 @@ body {
   margin-bottom: 20px;
   font-size: 18px;
   font-weight: bold;
+  cursor: pointer; /* Make it look interactive */
+}
+
+/* Confetti animation container */
+.confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Allow interaction with other elements */
+  z-index: 9999;
+  display: none; /* Hidden by default */
+}
+
+.confetti .particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  animation: confettiAnimation 1.5s linear infinite;
+}
+
+@keyframes confettiAnimation {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) rotate(360deg);
+    opacity: 0;
+  }
 }
 

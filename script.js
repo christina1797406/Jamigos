@@ -65,3 +65,40 @@ setInterval(() => {
 loadStreak();
 
 // Future: Reset if user skips a day (need to store last activity date)
+
+// Get the streak element
+const streakElement = document.querySelector('.streak');
+
+// Create the confetti container
+const confettiContainer = document.createElement('div');
+confettiContainer.classList.add('confetti');
+document.body.appendChild(confettiContainer);
+
+// Function to generate random confetti particles
+function generateConfetti(e) {
+  const numberOfParticles = 30; // Number of confetti particles to create
+
+  for (let i = 0; i < numberOfParticles; i++) {
+    const confettiParticle = document.createElement('div');
+    confettiParticle.classList.add('particle');
+
+    // Set random positions and animations
+    const x = Math.random() * 800 - 400; // Random X direction
+    const y = Math.random() * 600 - 300; // Random Y direction
+    confettiParticle.style.setProperty('--x', `${x}px`);
+    confettiParticle.style.setProperty('--y', `${y}px`);
+
+    confettiContainer.appendChild(confettiParticle);
+  }
+
+  // Show confetti container
+  confettiContainer.style.display = 'block';
+
+  // Hide after 1.5 seconds
+  setTimeout(() => {
+    confettiContainer.style.display = 'none';
+  }, 1500);
+}
+
+// Add hover event listener to the streak
+streakElement.addEventListener('mouseover', generateConfetti);
