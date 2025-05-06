@@ -23,7 +23,9 @@ body {
   width: 200px;
   background-color: #1e1e1e;
   padding: 20px;
-  flex-shrink: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .sidebar .logo {
@@ -44,7 +46,91 @@ body {
   color: #800080;
 }
 
-/* Main area */
+/* Light-dark theme toggle */
+.theme-toggle {
+  margin-top: auto;
+  display: flex;
+  text-align: center;
+}
+
+.theme-button {
+  background-color: #333;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 20px;
+  text-align: center;
+  transition: color 0.5s;
+  }
+
+.theme-button:hover {
+  background-color: #333;
+  transform: scale(1);
+}
+
+.theme-button span#theme-icon {
+  font-size: 18px;
+}
+
+.theme-button span#theme-text {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Light mode (override) */
+body.light-mode {
+  background-color: #f9f9f9;
+  color: #000;
+}
+
+body.light-mode .sidebar, body.light-mode .topbar, body.light-mode .rightbar, body.light-mode .player {
+  background-color: #ffffff;
+}
+
+body.light-mode .card {
+  background-color: #eaeaea;
+}
+
+body.light-mode .card:hover {
+  background-color: #dcdcdc;
+}
+
+body.light-mode .search-input {
+  background-color: #eaeaea;
+  border: #333 5px;
+  color: #000;
+}
+
+body.light-mode .invite-btn {
+  background-color: #800080;
+  color: #fff;
+}
+
+body.light-mode .confetti .particle {
+  background-color: #1db954;
+}
+
+body.light-mode #theme-text {
+  color: #000;
+}
+
+body.light-mode #theme-button {
+  background-color: #eaeaea;
+  color: black;
+  transform: scale(1);
+}
+
+body.dark-mode #theme-button {
+  background-color: #333;
+  color: white;
+  transform: scale(1);
+}
+
+/* ------ Main area ------ */
 .main {
   flex: 1;
   display: flex;

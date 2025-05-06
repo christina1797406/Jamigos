@@ -102,3 +102,39 @@ function generateConfetti(e) {
 
 // Add hover event listener to the streak
 streakElement.addEventListener('mouseover', generateConfetti);
+
+
+// Light-dark theme toggle
+const toggleButton = document.getElementById('theme-button');
+const icon = document.getElementById('theme-icon');
+const text = document.getElementById('theme-text');
+
+// Set dark/light theme
+function setTheme(mode) {
+  if (mode === 'light') {
+    document.body.classList.remove('dark-mode');
+    document.body.classList.add('light-mode');
+    text.textContent = 'Dark mode';
+    confettiContainer.classList.add('light-mode');
+  } else {
+    document.body.classList.remove('light-mode');
+    document.body.classList.add('dark-mode');
+    text.textContent = 'Light mode';
+    confettiContainer.classList.add('dark-mode');
+  }
+  localStorage.setItem('theme', mode);
+}
+
+toggleButton.addEventListener('click', () => {
+  const isLightMode =  document.body.classList.contains('light-mode');
+  if (isLightMode) {
+    setTheme('dark');
+  } else {
+    setTheme('light');
+  }
+})
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  setTheme(savedTheme);
+})
