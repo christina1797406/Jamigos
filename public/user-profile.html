@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jamigos - User Profile</title>
+    <link rel="stylesheet" href="profile.css">
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-image">
+                <img src="profile.jpg" alt="User's profile picture" id="profile-img">
+                <input type="file" id="upload-img" accept="image/*">
+            </div>
+            <h2 id="user-name">User Name</h2>
+            <p id="user-email">username@domain.com</p>
+            <button type="button" onclick="editProfile()">Edit Profile</button>
+        </div>
+
+        <div class="profile-info">
+            <h3>Your Playlists</h3>
+            <div id="playlists">
+                <!-- Playlists will appear here -->
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
