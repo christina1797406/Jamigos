@@ -2,16 +2,15 @@ CREATE DATABASE IF NOT EXISTS account_manager;
 USE account_manager;
 CREATE TABLE IF NOT EXISTS Users(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE,
     user_password VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(20) DEFAULT NULL,
     profile_picture VARCHAR(255) DEFAULT NULL,
     user_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE DATABASE IF NOT EXISTS Oauth;
+USE Oauth;
 CREATE TABLE IF NOT EXISTS Oauth_token(
     oauth_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -24,6 +23,8 @@ CREATE TABLE IF NOT EXISTS Oauth_token(
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
+CREATE DATABSE spotify;
+USE spotify;
 CREATE TABLE IF NOT EXISTS spotify_info(
     spotify_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
