@@ -9,46 +9,47 @@
 <body>
   <div class="settings-container">
     <h1>Settings</h1>
+    <div class="tabs">
+      <button type="button" class="tab-button active" onclick="showTab('profile')">Profile</button>
+      <button type="button" class="tab-button" onclick="showTab('theme')">Theme</button>
+      <button type="button" class="tab-button" onclick="showTab('help')">Help & FAQs</button>
+    </div>
 
-    <form id="settings-form">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" placeholder="Enter your username" />
-      </div>
+    <div class="tab-content" id="profile">
+      <h2>Profile Settings</h2>
+      <label>Username</label>
+      <input type="text" placeholder="Enter your username" />
+      <label>Email</label>
+      <input type="email" placeholder="Enter your email" />
+      <button type="button">Save Changes</button>
+    </div>
 
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" placeholder="Enter your email" />
-      </div>
+    <div class="tab-content hidden" id="theme">
+      <h2>Theme Preferences</h2>
+      <p>Select a theme:</p>
+      <select>
+        <option>Light Mode (Purple & White)</option>
+        <option>Dark Mode (Black & Purple)</option>
+      </select>
+      <button type="button">Apply Theme</button>
+    </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Change your password" />
-      </div>
+    <div class="tab-content hidden" id="help">
+      <h2>Help & FAQs</h2>
+      <div class="faq">
+        <h3>How do I select a mood and get music?</h3>
+        <p>Go to the Mood Board from the sidebar, choose a mood card, and we’ll generate a playlist for that mood.</p>
 
-      <div class="form-group toggle-group">
-        <label>Theme</label>
-        <button type="button" id="toggle-theme">🌗 Toggle Dark Mode</button>
-      </div>
+        <h3>Can I preview songs before adding them?</h3>
+        <p>Yes, on the Song Selection page you can listen to previews and add tracks to your playlist or create favourites.</p>
 
-      <div class="form-group">
-        <label>
-          <input type="checkbox" id="autoplay" />
-          Enable autoplay
-        </label>
-      </div>
+        <h3>Where can I change my settings?</h3>
+        <p>You’re here! Adjust your profile, theme, and preferences from this page.</p>
 
-      <div class="form-group">
-        <label>
-          <input type="checkbox" id="notifications" />
-          Receive notifications
-        </label>
+        <h3>What if something isn't working?</h3>
+        <p>Try refreshing the page. If the issue persists, contact jamigosdev@gmail.com</p>
       </div>
-
-      <div class="form-group">
-        <button type="submit">Save Changes</button>
-      </div>
-    </form>
+    </div>
   </div>
 
   <script src="settings.js"></script>
