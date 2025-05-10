@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jamigos | Settings</title>
+  <link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+  <div class="settings-container">
+    <h1>Settings</h1>
+
+    <form id="settings-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter your username" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Change your password" />
+      </div>
+
+      <div class="form-group toggle-group">
+        <label>Theme</label>
+        <button type="button" id="toggle-theme">🌗 Toggle Dark Mode</button>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" id="autoplay" />
+          Enable autoplay
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" id="notifications" />
+          Receive notifications
+        </label>
+      </div>
+
+      <div class="form-group">
+        <button type="submit">Save Changes</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>

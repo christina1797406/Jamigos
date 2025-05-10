@@ -1,0 +1,99 @@
+:root {
+  --purple: #7c3aed;
+  --light-bg: #ffffff;
+  --light-text: #1f1f1f;
+  --dark-bg: #121212;
+  --dark-text: #f1f1f1;
+  --input-bg: #f3f4f6;
+  --radius: 0.75rem;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --font: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background-color: var(--light-bg);
+  color: var(--light-text);
+  transition: background 0.3s, color 0.3s;
+}
+
+.settings-container {
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: var(--light-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+h1 {
+  text-align: center;
+  color: var(--purple);
+  margin-bottom: 2rem;
+}
+
+form .form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  background-color: var(--input-bg);
+  font-size: 1rem;
+}
+
+input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+button[type="submit"],
+#toggle-theme {
+  background-color: var(--purple);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.4rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #5b21b6;
+}
+
+.toggle-group {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+.dark-mode .settings-container {
+  background-color: #1e1e1e;
+}
+
+.dark-mode input,
+.dark-mode input[type="text"],
+.dark-mode input[type="email"],
+.dark-mode input[type="password"] {
+  background-color: #2a2a2a;
+  color: var(--dark-text);
+  border: 1px solid #444;
+}
