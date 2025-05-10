@@ -1,125 +1,178 @@
 body {
-    margin: 0;
-    font-family: 'Helvetica Neue', sans-serif;
-    background-color: #f9f9f9;
-    color: #111;
-  }
+  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #f9f9f9;
+  color: #111;
+  display: flex;
+}
 
-  .app-container {
-    display: flex;
-  }
+.sidebar {
+  width: 220px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+  height: 100vh;
+}
 
-  .sidebar {
-    width: 220px;
-    background-color: #fff;
-    border-right: 1px solid #ddd;
-    padding: 20px;
-    height: 100vh;
-  }
+.sidebar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
 
-  .sidebar h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
 
-  .sidebar nav ul {
-    list-style: none;
-    padding: 0;
-  }
+.sidebar nav li {
+  padding: 10px 0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
 
-  .sidebar nav li {
-    padding: 10px 0;
-    cursor: pointer;
-  }
+.sidebar nav li:hover,
+.sidebar nav li.active {
+  color: #1db954;
+  font-weight: bold;
+}
 
-  .sidebar nav li.active,
-  .sidebar nav li:hover {
-    font-weight: bold;
-    color: #1db954;
-  }
+.profile-page {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px;
+}
 
-  .profile-page {
-    flex: 1;
-    padding: 30px;
-  }
+.profile-box {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
 
-  .profile-header {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 20px;
-  }
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+}
 
-  .avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 60px;
-    object-fit: cover;
-    background-color: #ddd;
-  }
+/* Avatar with image or fallback */
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: #ddd;
+  border: 3px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 36px;
+  color: #333;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+}
 
-  .user-info h2 {
-    margin: 0;
-  }
+/* dynamically set image via JS */
+.avatar.has-image {
+  background-image: url('assets/profile.jpg');
+}
 
-  .user-info p {
-    margin: 4px 0;
-    color: #555;
-  }
 
-  .profile-actions button {
-    margin-right: 10px;
-    margin-top: 10px;
-    padding: 6px 14px;
-    border: none;
-    border-radius: 20px;
-    background-color: #efefef;
-    cursor: pointer;
-  }
+.user-info h2 {
+  margin: 0;
+  font-size: 28px;
+}
 
-  .tabs {
-    display: flex;
-    gap: 20px;
-    margin-top: 30px;
-  }
+.user-info p {
+  margin: 5px 0;
+  color: #555;
+}
 
-  .tabs button {
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    border-radius: 12px;
-    cursor: pointer;
-  }
+.user-info span {
+  display: block;
+  margin-top: 5px;
+  color: #888;
+}
 
-  .tabs button.active {
-    background-color: #eee;
-    font-weight: bold;
-  }
+.profile-actions {
+  margin-top: 15px;
+}
 
-  .playlists {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-  }
+.profile-actions button {
+  margin-right: 10px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  background-color: #efefef;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
 
-  .playlist-card {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    text-align: center;
-  }
+.profile-actions button:hover {
+  background-color: #ddd;
+}
 
-  .playlist-card img {
-    width: 100%;
-    border-radius: 8px;
-    object-fit: cover;
-    height: 150px;
-  }
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px 0 20px;
+}
 
-  .playlist-card p {
-    margin: 8px 0 0 0;
-    font-weight: bold;
-  }
+.tabs button {
+  padding: 10px 22px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tabs button.active,
+.tabs button:hover {
+  background-color: #383e3a;
+  color: white;
+  font-weight: bold;
+}
+
+.playlists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 0 20px;
+}
+
+.playlist-card {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.playlist-card:hover {
+  transform: translateY(-4px);
+}
+
+.playlist-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.playlist-card p {
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+.playlist-card small {
+  color: #777;
+}

@@ -2,17 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jamigos - User Profile</title>
-    <link rel="stylesheet" href="profile.css">
-    <script defer src="profile.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jamigos - User Profile</title>
+  <link rel="stylesheet" href="stylesheets/profile.css">
+  <script defer src="javascripts/profile.js"></script>
 </head>
 
 <body>
-    <!-- Sidebar -->
+  <!-- Sidebar -->
   <aside class="sidebar">
-    <h2 class="logo">Jamigos<span class="purple-dot">.</span></h2>
+    <h2 class="logo">Jamigos<span class="purple-dot"></span></h2>
     <nav>
       <ul>
         <li>Home</li>
@@ -26,31 +26,39 @@
     </nav>
   </aside>
 
-      <main class="profile-page">
-        <section class="profile-header">
-          <img src="assets/profile.jpg" class="avatar" alt="Profile Picture">
-          <div class="user-info">
-            <h2>User123</h2>
-            <p>user123@gmail.com</p>
-            <span>10 Followers · 10 Following</span>
-            <div class="profile-actions">
-              <button type="button">Edit Profile</button>
-              <button type="button">🔗</button>
-              <button type="button">⋯</button>
-            </div>
-          </div>
-        </section>
+  <main class="profile-page">
+    <section class="profile-header">
+      <div class="profile-box"></div>
 
-        <div class="tabs">
-          <button type="button" class="active">My Playlists</button>
-          <button type="button">Favorites</button>
-          <button type="button">Recently Played</button>
-          <button type="button">My Karaoke Moments</button>
+      <div class="avatar" id="avatar">
+        <span>Profile Pic</span> <!-- fallback initials-->
+        <input type="file" id="avatarInput" accept="image/*" hidden>
+      </div>
+
+      <div class="user-info">
+        <h2>User123</h2>
+        <p>user123@gmail.com</p>
+        <span>10 Followers · 10 Following</span>
+
+        <div class="profile-actions">
+          <button type="button">Edit Profile</button>
+          <button type="button">🔗</button>
+          <button type="button">⋯</button>
         </div>
+      </div>
+    </section>
 
-        <section class="playlists">
-          <!-- JS will populate this -->
-        </section>
-      </main>
-  </body>
-  </html>
+    <div class="tabs">
+      <button type="button" class="active">My Playlists</button>
+      <button type="button">Favorites</button>
+      <button type="button">Recently Played</button>
+      <button type="button">My Karaoke Moments</button>
+    </div>
+
+    <!-- JS related -->
+    <section class="playlists">
+    </section>
+  </main>
+</body>
+
+</html>
