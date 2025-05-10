@@ -126,15 +126,15 @@ function setTheme(mode) {
 }
 
 toggleButton.addEventListener('click', () => {
-  const isLightMode =  document.body.classList.contains('light-mode');
+  const isLightMode = document.body.classList.contains('light-mode');
   if (isLightMode) {
     setTheme('dark');
   } else {
     setTheme('light');
   }
-})
+});
 
 window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('theme') || 'dark';
   setTheme(savedTheme);
-})
+});
