@@ -60,24 +60,47 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = "none";
   });
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Update text
-    usernameEl.textContent = document.getElementById("editUsername").value;
-    emailEl.textContent = document.getElementById("editEmail").value;
-
-    // Update profile picture
+    const newUsername = document.getElementById("editUsername").value;
+    const newEmail = document.getElementById("editEmail").value;
     const pic = document.getElementById("editProfilePic").files[0];
+
+    const formData = {
+      username: newUsername,
+      email: newEmail
+    };
+
+    const sendData = async (data) => {
+      try {
+        const res = await fetch("/profile-pic", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          usernameEl.textContent = newUsername;
+          emailEl.textContent = newEmail;
+          modal.style.display = "none";
+        }
+      } catch (err) {
+        // handle error silently
+      }
+    };
+
     if (pic && pic.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onload = () => {
+        formData.image = reader.result;
         avatar.style.backgroundImage = `url('${reader.result}')`;
         avatarSpan.style.display = "none";
+        sendData(formData);
       };
       reader.readAsDataURL(pic);
+    } else {
+      sendData(formData);
     }
-
-    modal.style.display = "none";
   });
 });
