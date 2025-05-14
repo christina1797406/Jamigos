@@ -17,29 +17,67 @@ playlists.forEach(pl => {
   container.appendChild(card);
 });
 
-/* Everything DOM-dependent should go inside this block */
 document.addEventListener("DOMContentLoaded", () => {
   const avatar = document.getElementById("avatar");
   const fileInput = document.getElementById("avatarInput");
+  const avatarSpan = avatar.querySelector("span");
 
-  // Auto generate initials
-  const username = "User123";
-  const initials = username[0].toUpperCase();
-  avatar.querySelector("span").textContent = initials;
+  const usernameEl = document.querySelector(".user-info h2");
+  const emailEl = document.querySelector(".user-info p");
 
-  // Load profile image
+  // Auto-generate initials
+  const initials = usernameEl.textContent[0].toUpperCase();
+  avatarSpan.textContent = initials;
+
+  // Avatar click opens file input
+  avatar.addEventListener("click", () => fileInput.click());
+
   fileInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onload = () => {
         avatar.style.backgroundImage = `url('${reader.result}')`;
-        avatar.querySelector("span").style.display = "none"; // Hide initials
+        avatarSpan.style.display = "none";
       };
       reader.readAsDataURL(file);
     }
   });
 
-  // Click avatar to open file picker
-  avatar.addEventListener("click", () => fileInput.click());
+  // Edit Profile Modal
+  const editBtn = document.querySelector(".profile-actions button");
+  const modal = document.getElementById("editModal");
+  const form = document.getElementById("editForm");
+  const cancelBtn = document.getElementById("cancelEdit");
+
+  editBtn.addEventListener("click", () => {
+    document.getElementById("editUsername").value = usernameEl.textContent;
+    document.getElementById("editEmail").value = emailEl.textContent;
+    modal.style.display = "flex";
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // Update text
+    usernameEl.textContent = document.getElementById("editUsername").value;
+    emailEl.textContent = document.getElementById("editEmail").value;
+
+    // Update profile picture
+    const pic = document.getElementById("editProfilePic").files[0];
+    if (pic && pic.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        avatar.style.backgroundImage = `url('${reader.result}')`;
+        avatarSpan.style.display = "none";
+      };
+      reader.readAsDataURL(pic);
+    }
+
+    modal.style.display = "none";
+  });
 });
