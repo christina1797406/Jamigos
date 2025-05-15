@@ -150,8 +150,8 @@ body {
 
 .tabs button.active,
 .tabs button:hover {
-  background-color: #383e3a;
-  color: white;
+  background-color: #bbbdbc;
+  color: black;
   font-weight: bold;
 }
 
@@ -168,7 +168,7 @@ body {
   background-color: #fff;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(93, 92, 92, 0.05);
   text-align: center;
   transition: transform 0.2s;
 }
