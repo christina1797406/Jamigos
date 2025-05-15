@@ -8,7 +8,7 @@ body {
 
 .sidebar {
   width: 200px;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -39,11 +39,12 @@ body {
 
 .sidebar nav ul li:hover {
   color: #800080;
-  padding-left: 10px;
+  padding-left: 0px;
 }
 
 .sidebar nav h4 {
-  margin: 20px 0 10px; /* top, right/left, bottom */
+  margin: 20px 0 5px; /* top, right/left, bottom */
+  padding-left: 22px;
   font-size: 14px;
   text-transform: uppercase;
   color: #060000;
