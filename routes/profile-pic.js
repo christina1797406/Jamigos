@@ -3,7 +3,6 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const router = express.Router();
-const database = require("../database");
 
 router.post("/", (req, res) => {
   const { username, email, image } = req.body;
@@ -15,40 +14,16 @@ router.post("/", (req, res) => {
 
     const filename = `${Date.now()}-avatar.${extension}`;
     const filePath = path.join(__dirname, "..", "public", "uploads", filename);
-    const avatarPath = `/uploads/${filename}`;
 
     fs.writeFile(filePath, buffer, (err) => {
       if (err) {
         return res.status(500).json({ error: "Failed to save image" });
       }
-
-      // Save user details to database
-      database.query(
-        "INSERT INTO users (username, email, avatar_path) VALUES (?, ?, ?)",
-        [username, email, avatarPath],
-        (databaseErr, results) => {
-          if (databaseErr) {
-            console.error("DB insert error:", databaseErr);
-            return res.status(500).json({ error: "Failed to save to database" });
-          }
-          res.json({ message: "Profile updated", avatarPath });
-        }
-      );
+      res.json({ message: "Profile updated", avatarPath: `/uploads/${filename}` });
     });
   } else {
-    // Save without image
-    database.query(
-      "INSERT INTO users (username, email) VALUES (?, ?)",
-      [username, email],
-      (dbErr, results) => {
-        if (dbErr) {
-          console.error("DB insert error:", databaseErr);
-          return res.status(500).json({ error: "Failed to save to database" });
-        }
-        res.json({ message: "Profile updated without image" });
-      }
-    );
+    res.json({ message: "Profile updated without image" });
   }
 });
 
-module.exports = router;
+module.exports = router
