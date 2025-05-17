@@ -71,6 +71,7 @@ app.get('/api/trending', async (req, res) => {
         id: track.id,
         name: track.name,
         artist: track.artists.map(a => a.name).join(', '),
+        // eslint-disable-next-line no-nested-ternary
         albumArt: track.album.images[0]?.url || '',
         url: track.external_urls.spotify,
       };
