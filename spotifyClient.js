@@ -38,16 +38,19 @@ async function getAccessToken() {
 // Helper to call Spotify API endpoints with auth
 async function spotifyGet(endpoint, params = {}) {
   const token = await getAccessToken();
+  const fullEndpoint = `https://api.spotify.com/v1/${endpoint.replace(/^\/+/, '')}`;
+  console.log('Fetching:', fullEndpoint, 'with params:', params);
 
   try {
-    const response = await axios.get(`https://api.spotify.com/v1/${endpoint}`, {
+    const response = await axios.get(fullEndpoint, {
       headers: { Authorization: `Bearer ${token}` },
-      params
+      params,
     });
     return response.data;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error(`Spotify API error on ${endpoint}:`, (error.response && error.response.data) ? error.response.data : error.message);
+    console.error(`Spotify API error on ${endpoint}:`,
+    (error.response && error.response.data) ? error.response.data : error.message);
     throw error;
   }
 }
