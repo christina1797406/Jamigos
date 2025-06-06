@@ -1,0 +1,93 @@
+:root {
+  --primary: #7c3aed;
+  --light-bg: #f7f5ff;
+  --dark-text: #1f1f1f;
+  --card-bg: #ffffff;
+  --radius: 0.75rem;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--light-bg);
+  color: var(--dark-text);
+}
+
+.settings-container {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.tab-button {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  background: #e0d7fa;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tab-button.active {
+  background: var(--primary);
+  color: white;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content:not(.hidden) {
+  display: block;
+}
+
+.tab-content h2 {
+  color: var(--primary);
+}
+
+input, select {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  margin: 1rem 0;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.faq h3 {
+  margin-top: 1.5rem;
+  color: #333;
+}
+
+.faq p {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
