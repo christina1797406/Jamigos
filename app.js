@@ -59,7 +59,7 @@ app.get('/api/playlists', async (req, res) => {
   }
 });
 
-// Get trending tracks (Here we use Spotify’s "Get Charts" via a popular playlist ID — can be customized)
+// Get trending tracks
 app.get('/api/trending', async (req, res) => {
   try {
     // Example: Get tracks from Spotify’s Global Top 50 playlist
@@ -105,7 +105,7 @@ function createUserSpotifyClient(session) {
   return spotifyApi;
 }
 
-// GET /api/my-playlists — get current user's playlists
+// GET /api/my-playlists
 app.get('/api/my-playlists', async (req, res) => {
   if (!req.session.accessToken) {
     return res.status(401).json({ error: 'Unauthorized: Not logged in with Spotify' });

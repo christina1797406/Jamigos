@@ -40,8 +40,6 @@ fetch('/api/trending')
 
 
 // Basic player controls ------------------
-let isPlaying = false;
-
 function showToast(message) {
   const toast = document.getElementById('toast');
   toast.innerText = message;
@@ -49,10 +47,22 @@ function showToast(message) {
   setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3000);
 }
 
+let isPlaying = false;
 function togglePlay() {
-  isPlaying = !isPlaying;
-  const button = document.querySelector('.controls btton:nth-child(2)');u
-  button.innerText = isPlaying ? '⏸️' : '▶️';
+  const button = document.querySelector('.controls button:nth-child(2)') || document.getElementById('play-button');
+  if (!button) {
+    console.error('Play button not found');
+    return;
+  }
+  if (isPlaying) {
+    isPlaying = false; // Currently playing, so pause it
+    button.innerText = '▶️';
+    showToast('Song paused');
+  } else {
+    isPlaying = true; // Currently paused, so play it
+    button.innerText = '⏸️';
+    showToast('Playing song');
+  }
 }
 function prevSong() { showToast('Playing previous song'); }
 function nextSong() { showToast('Playing next song'); }
