@@ -1,49 +1,64 @@
-// Placeholder: Fake song data for now
-const recommendations = ["Song A", "Song B", "Song C", "Song D"];
-const playlists = ["Playlist 1", "Playlist 2", "Playlist 3"];
-const trending = ["Trending 1", "Trending 2", "Trending 3"];
-
-function populateCards(containerId, items) {
+// Populate cards on dashboard ------------------
+function populateCards(containerId, items, isSpotify = false) {
   const container = document.getElementById(containerId);
+  container.innerHTML = '';
+
   items.forEach((item) => { // <-- Added parentheses around the parameter
     const card = document.createElement('div');
     card.className = 'card';
-    card.innerText = item;
+
+    // Display albumn art if isSpotify = true
+    if (isSpotify) {
+      card.innerHTML = `
+      <img src="${item.albumArt}" alt="${item.name}" style="width:100%; border-radius: 6px;">
+      <p>${item.name}</p>
+      <small>${item.artist || ''}</small>
+    `;
+    card.onclick = () => window.open(item.url, '_blank');
+    } else {
+      card.innerText = item;
+    }
     container.appendChild(card);
   });
 }
 
-// Fill dashboard
-populateCards('recommendations', recommendations);
-populateCards('playlists', playlists);
-populateCards('trending', trending);
+// Fetch real data using api ------------------
+fetch('/api/recommendations')
+  .then(res => res.json())
+  .then(data => populateCards('recommendations', data, true))
+  .catch(err => console.error('Failed to load recommendations:', err));
 
-// Basic player controls
+fetch('/api/my-playlists')
+  .then(res => res.json())
+  .then(data => populateCards('playlists', data, true))
+  .catch(err => console.error('Failed to load playlists:', err));
+
+fetch('/api/trending')
+  .then(res => res.json())
+  .then(data => populateCards('trending', data, true))
+  .catch(err => console.error('Failed to load trending:', err));
+
+
+// Basic player controls ------------------
 let isPlaying = false;
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.innerText = message;
+  toast.className = 'toast show';
+  setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3000);
+}
 
 function togglePlay() {
   isPlaying = !isPlaying;
-  const button = document.querySelector('.controls button:nth-child(2)');
+  const button = document.querySelector('.controls btton:nth-child(2)');u
   button.innerText = isPlaying ? '⏸️' : '▶️';
 }
-
-function prevSong() {
-  const toast = document.getElementById('toast');
-  toast.innerText = 'Playing previous song';
-  toast.className = 'toast show';
-  setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3000);
-}
-
-function nextSong() {
-  const toast = document.getElementById('toast');
-  toast.innerText = 'Playing next song';
-  toast.className = 'toast show';
-  setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3000);
-}
+function prevSong() { showToast('Playing previous song'); }
+function nextSong() { showToast('Playing next song'); }
 
 
-// -- Populate cards as before --
-
+// Populate cards as before (streaks) ------------------
 function loadStreak() {
   const streak = localStorage.getItem('karaokeStreak') || 0;
   document.getElementById('streak-count').innerText = streak;
@@ -57,20 +72,13 @@ function updateStreak() {
 }
 
 // For testing, automatically increment streak every 10 seconds
-// (In real app, call updateStreak() after a karaoke session ends.)
-setInterval(() => {
-  updateStreak();
-}, 10000);
-
+setInterval(updateStreak, 10000);
 loadStreak();
 
-// Future: Reset if user skips a day (need to store last activity date)
 
-// Get the streak element
+// Streak confettti on hover ------------------
 const streakElement = document.querySelector('.streak');
-
-// Create the confetti container
-const confettiContainer = document.createElement('div');
+const confettiContainer = document.createElement('div'); // Create the confetti container
 confettiContainer.classList.add('confetti');
 document.body.appendChild(confettiContainer);
 
@@ -90,26 +98,16 @@ function generateConfetti(e) {
 
     confettiContainer.appendChild(confettiParticle);
   }
-
-  // Show confetti container
-  confettiContainer.style.display = 'block';
-
-  // Hide after 1.5 seconds
-  setTimeout(() => {
-    confettiContainer.style.display = 'none';
-  }, 1500);
+  confettiContainer.style.display = 'block'; // Show confetti container
+  setTimeout(() => { confettiContainer.style.display = 'none'; }, 1500); // Hide after 1.5 seconds
 }
-
-// Add hover event listener to the streak
-streakElement.addEventListener('mouseover', generateConfetti);
+streakElement.addEventListener('mouseover', generateConfetti); // Add hover event listener to the streak
 
 
-// Light-dark theme toggle
+// Light-dark theme toggle ------------------
 const toggleButton = document.getElementById('theme-button');
-const icon = document.getElementById('theme-icon');
 const text = document.getElementById('theme-text');
 
-// Set dark/light theme
 function setTheme(mode) {
   if (mode === 'light') {
     document.body.classList.remove('dark-mode');
@@ -124,7 +122,6 @@ function setTheme(mode) {
   }
   localStorage.setItem('theme', mode);
 }
-
 toggleButton.addEventListener('click', () => {
   const isLightMode = document.body.classList.contains('light-mode');
   if (isLightMode) {

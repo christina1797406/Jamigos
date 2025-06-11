@@ -7,21 +7,15 @@ let tokenExpiresAt = 0;
 
 // Get a new access token using Client Credentials Flow
 async function getAccessToken() {
-  if (accessToken && Date.now() < tokenExpiresAt) {
-    return accessToken;
-  }
-
+  if (accessToken && Date.now() < tokenExpiresAt) {return accessToken;}
   const clientId = process.env.SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
   const tokenUrl = 'https://accounts.spotify.com/api/token';
-
-  const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    Authorization:
-      'Basic ' + Buffer.from(clientId + ':' + clientSecret).toString('base64'),
-  };
-
   const data = new URLSearchParams({ grant_type: 'client_credentials' }).toString();
+  const headers = {
+    'Authorization': 'Basic ' + Buffer.from(clientId + ':' + clientSecret).toString('base64'),
+    'Content-Type': 'application/x-www-form-urlencoded'
+  };
 
   try {
     const response = await axios.post(tokenUrl, data, { headers });
@@ -55,7 +49,4 @@ async function spotifyGet(endpoint, params = {}) {
   }
 }
 
-module.exports = {
-  getAccessToken,
-  spotifyGet
-};
+module.exports = { getAccessToken, spotifyGet };

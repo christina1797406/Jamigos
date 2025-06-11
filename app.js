@@ -1,10 +1,14 @@
 var express = require('express');
 var spotifyClient = require('./spotifyClient');
 var path = require('path');
+var SpotifyWebApi = require('spotify-web-api-node');
+var session = require('express-session');
+var { getLoginUrl, exchangeCodeForToken } = require('./auth'); // from auth.js
+
 require('dotenv').config();
 
 var app = express();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3000 || 8080;
 
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -80,6 +84,68 @@ app.get('/api/trending', async (req, res) => {
     res.json(tracks);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch trending tracks' });
+  }
+});
+
+// Middleware for sessions
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+}));
+
+// Helper to create a Spotify API client with the user's token
+function createUserSpotifyClient(session) {
+  const spotifyApi = new SpotifyWebApi({
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectUri: process.env.SPOTIFY_REDIRECT_URI,
+  });
+  spotifyApi.setAccessToken(session.accessToken);
+  return spotifyApi;
+}
+
+// GET /api/my-playlists — get current user's playlists
+app.get('/api/my-playlists', async (req, res) => {
+  if (!req.session.accessToken) {
+    return res.status(401).json({ error: 'Unauthorized: Not logged in with Spotify' });
+  }
+
+  try {
+    const spotify = createUserSpotifyClient(req.session);
+    const data = await spotify.getUserPlaylists();
+
+    const playlists = data.body.items.map(pl => ({
+      id: pl.id,
+      name: pl.name,
+      albumArt: pl.images[0]?.url || '',
+      url: pl.external_urls.spotify,
+    }));
+
+    res.json(playlists);
+  } catch (error) {
+    console.error('Error fetching user playlists:', error.message);
+    res.status(500).json({ error: 'Failed to fetch user playlists' });
+  }
+});
+
+// Login route
+app.get('/login', (req, res) => {
+  res.redirect(getLoginUrl());
+});
+
+// Callback route
+app.get('/callback', async (req, res) => {
+  const { code } = req.query;
+  try {
+    const { accessToken, refreshToken, expiresIn } = await exchangeCodeForToken(code);
+    req.session.accessToken = accessToken;
+    req.session.refreshToken = refreshToken;
+    req.session.expiresAt = Date.now() + expiresIn * 1000;
+    res.redirect('/'); // or redirect to dashboard
+  } catch (err) {
+    console.error('OAuth callback error:', err);
+    res.status(500).send('Authentication failed');
   }
 });
 
