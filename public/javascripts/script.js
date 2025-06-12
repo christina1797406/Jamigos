@@ -146,16 +146,23 @@ window.addEventListener('DOMContentLoaded', () => {
   setTheme(savedTheme);
 });
 
-// Set user profile picture in dashboard
+// Set profile picture in dashboard
 window.addEventListener('DOMContentLoaded', () => {
   const profilePic = document.getElementById('profile-pic');
-  const avatarPath = localStorage.getItem('avatarPath');
+  const localAvatar = localStorage.getItem('avatarPath');
 
-  if (profilePic) {
-    if (avatarPath) {
-      profilePic.src = avatarPath;
-    } else {
-      profilePic.src = '/uploads/default-avatar.png'; // fallback image
-    }
-  }
+  fetch('/api/user-info')
+    .then(res => res.json())
+    .then(user => {
+      if (profilePic) {
+        profilePic.src =
+          localAvatar || user.avatarPath || '/uploads/default-avatar.png';
+      }
+    })
+    .catch(err => {
+      console.error('Failed to load user info or profile picture:', err);
+      if (profilePic) {
+        profilePic.src = localAvatar || '/uploads/default-avatar.png';
+      }
+    });
 });
