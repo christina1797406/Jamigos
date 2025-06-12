@@ -147,15 +147,15 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Set user profile picture in dashboard
-fetch('/api/user-info')
-  .then(res => res.json())
-  .then(user => {
-    const email = user.email || 'default';
-    const profilePic = document.getElementById('profile-pic');
-    if (profilePic) {
-      profilePic.src = `/user-profile/profile-pics/${email}.png`;
+window.addEventListener('DOMContentLoaded', () => {
+  const profilePic = document.getElementById('profile-pic');
+  const avatarPath = localStorage.getItem('avatarPath');
+
+  if (profilePic) {
+    if (avatarPath) {
+      profilePic.src = avatarPath;
+    } else {
+      profilePic.src = '/uploads/default-avatar.png'; // fallback image
     }
-  })
-  .catch(err => {
-    console.error('Failed to load user info or profile picture:', err);
-  });
+  }
+});
