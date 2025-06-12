@@ -259,7 +259,7 @@ app.get('/callback', async (req, res) => {
     req.session.accessToken = accessToken;
     req.session.refreshToken = refreshToken;
     req.session.expiresAt = Date.now() + expiresIn * 1000;
-    res.redirect('/'); // or redirect to dashboard
+    res.redirect('/dashboard.html'); // or redirect to dashboard
   } catch (err) {
     console.error('OAuth callback error:', err);
     res.status(500).send('Authentication failed');
