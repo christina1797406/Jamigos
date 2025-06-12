@@ -54,22 +54,28 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const sendData = async (data) => {
-      try {
-        const res = await fetch("/profile-pic", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
+  try {
+    const res = await fetch("/profile-pic", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
 
-        if (res.ok) {
-          usernameEl.textContent = newUsername;
-          emailEl.textContent = newEmail;
-          modal.style.display = "none";
-        }
-      } catch (err) {
-        // handle error silently
+    if (res.ok) {
+      const response = await res.json();
+      usernameEl.textContent = data.username;
+      emailEl.textContent = data.email;
+      modal.style.display = "none";
+
+      if (response.avatarPath) {
+        // Save uploaded pic path to localStorage for dashboard to use
+        localStorage.setItem('avatarPath', response.avatarPath);
       }
-    };
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
 
     if (pic && pic.type.startsWith("image/")) {
       const reader = new FileReader();
