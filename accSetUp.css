@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+
+
+  body {
+    display: flex;
+    height: 100vh;
+    background-color: #fff;
+  }
+
+  .container {
+    display: flex;
+    width: 100%;
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  h4 {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .email-input, .username-input, .password-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  .signup-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 15px;
+    text-align: center;
+
+  }
+
+  .divider {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 20px 0;
+    text-align: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #555;
+    margin: 0 10px;
+  }
+
+  .google-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #eee;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+
+  .google-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .google {
+    font-size: 1rem;
+  }
+
+  .google-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .terms {
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .terms a {
+    color: #666;
+    text-decoration: underline;
+  }
+
+  .existing-account {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.8rem;
+  }
