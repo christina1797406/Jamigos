@@ -145,3 +145,17 @@ window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('theme') || 'dark';
   setTheme(savedTheme);
 });
+
+// Set user profile picture in dashboard
+fetch('/api/user-info')
+  .then(res => res.json())
+  .then(user => {
+    const email = user.email || 'default';
+    const profilePic = document.getElementById('profile-pic');
+    if (profilePic) {
+      profilePic.src = `/user-profile/profile-pics/${email}.png`;
+    }
+  })
+  .catch(err => {
+    console.error('Failed to load user info or profile picture:', err);
+  });
