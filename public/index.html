@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jamigos | Mood Board</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="moodboard.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>What are you in the Mood for?</h1>
+      <p>Select to start your Jam experience</p>
+    </header>
+
+    <section class="mood-grid">
+      <div class="mood-card happy">😊<span>Happy</span></div>
+      <div class="mood-card chill">🌙<span>Chill</span></div>
+      <div class="mood-card energetic">⚡<span>Energetic</span></div>
+      <div class="mood-card sad">😭<span>Sad</span></div>
+      <div class="mood-card romantic">❤️<span>Romantic</span></div>
+      <div class="mood-card focus">🎧<span>Focus</span></div>
+      <div class="mood-card confident">😎<span>Upbeat</span></div>
+      <div class="mood-card nostalgic">📻<span>Nostalgic</span></div>
+      <div class="mood-card dreamy">☁️<span>Dreamy</span></div>
+      <div class="mood-card angry">😡<span>Angry</span></div>
+      <div class="mood-card peaceful">🧘<span>Peaceful</span></div>
+      <div class="mood-card adventurous">🌄<span>Adventurous</span></div>
+      <div class="mood-card adventurous">🏃<span>Sporty</span></div>
+      <div class="mood-card adventurous">🥱<span>Bored</span></div>
+      <div class="mood-card adventurous">👎<span>Downbeat</span></div>
+      <div class="mood-card adventurous">😜<span>Hyper</span></div>
+      <div class="mood-card adventurous">✅<span>Positive</span></div>
+    </section>
+
+    <footer class="theme-toggle">
+      <button type="button" onclick="toggleTheme()">🌗 Toggle Theme</button>
+    </footer>
+
+    <div style = "margin-top: 2rem;">
+      <button type = "button" id = "generatePlaylist"> Generate Playlist</button>
+    </div>
+
+    <div id = "playlistContainer"></div>
+
+    <div id="playlistModal" class="modal hidden">
+      <div class="playlist-box">
+        <button type = "button" id="closeModal" class="close-button">X</button>
+        <input type="text" class="playlist-title" value="Playlist 1" />
+        <div class="song-list">
+          <p>(Songs will appear here)</p>
+        </div>
+      </div>
+  </div>
+  </div>
+
+
+  <script src = "moodscript.js"></script>
+</body>
+</html>
