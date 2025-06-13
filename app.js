@@ -11,6 +11,7 @@ const SpotifyWebApi = require('spotify-web-api-node');
 const { OAuth2Client } = require('google-auth-library');
 const { getLoginUrl, exchangeCodeForToken } = require('./auth');
 const spotifyClient = require('./spotifyClient'); // Spotify helper
+const { getAccessToken } = require('./spotifyClient');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -234,6 +235,35 @@ app.get('/api/my-playlists', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch user playlists' });
   }
 });
+
+
+// // ----- START New endpoints Top 5 Tracks -----
+// // const token = 'BQBamgdSoB5rSKLa7JP-kNSk7qndtm-AA3_ZUI69Kn304o19DDVo-cIoiubEhWloIsaMNBKGowJu0Ck8wOUd6Wso9oRZwzA6OlhytB5jRBuboPhoWmBe8ajExD1FS9ijbbX7WL1LhWMWHJPZeRQhtdAKayzBijU9htCVsS5ZK6Qa1P8z-xIdrFDKQKUyGrR3li_vUDv-blxcF2B1TeT-_hxW9_aTyKEH-uMPX8f7PB2xUoM9Vnt2eG9B2vszPP39i339V82eZ30QYax7klSD5WFN4FOx6CR3fEABZVdTP2k90sZcVVbmPKHlDbqW9D0R';
+// async function fetchWebApi(endpoint, method, body) {
+//   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+//     headers: {
+//       Authorization: `Bearer ${getAccessToken}`, // Or req.session.accessToken
+//     },
+//     method,
+//     body:JSON.stringify(body)
+//   });
+//   return await res.json();
+// }
+
+// async function getTopTracks(){
+//   return (await fetchWebApi(
+//     'v1/me/top/tracks?time_range=long_term&limit=5', 'GET'
+//   )).items;
+// }
+
+// const topTracks = await getTopTracks();
+// console.log(
+//   topTracks?.map(
+//     ({name, artists}) =>
+//       `${name} by ${artists.map(artist => artist.name).join(', ')}`
+//   )
+// );
+// // ----- END New endpoints Top 5 Tracks -----
 
 // Helper to create a Spotify API client with the user's token
 function createUserSpotifyClient(session) {

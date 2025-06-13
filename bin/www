@@ -88,3 +88,9 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+// (async () => {
+//   const topTracks = await getTopTracks();
+//   console.log(topTracks);
+// })();

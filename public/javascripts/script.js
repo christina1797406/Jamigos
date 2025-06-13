@@ -38,6 +38,21 @@ fetch('/api/trending')
   .then(data => populateCards('trending', data, true))
   .catch(err => console.error('Failed to load trending:', err));
 
+// // Frontend Top 5 Tracks
+// async function fetchTopTracks() {
+//   const response = await fetch("/spotify/top-tracks");
+//   const data = await response.json();
+
+//   const tracks = data.items;
+//   const formatted = tracks.map(
+//     ({ name, artists }) =>
+//       `${name} by ${artists.map((artist) => artist.name).join(", ")}`
+//   );
+
+//   console.log("Top Tracks:", formatted);
+// }
+
+// fetchTopTracks();
 
 // Basic player controls ------------------
 function showToast(message) {
