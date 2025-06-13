@@ -1,26 +1,8 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var profileRouter = require('./routes/profile-pic'); // for profile
-
-var app = express();
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 require('dotenv').config();
 
 const mysql = require('mysql2');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
@@ -29,6 +11,7 @@ const { OAuth2Client } = require('google-auth-library');
 const { getLoginUrl, exchangeCodeForToken } = require('./auth');
 const spotifyClient = require('./spotifyClient'); // Spotify helper
 const { getAccessToken } = require('./spotifyClient');
+const profileRouter = require('./routes/profile-pic'); // for profile
 
 const PORT = process.env.PORT || 3000;
 
@@ -36,6 +19,7 @@ const PORT = process.env.PORT || 3000;
 // -------- Middleware --------
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cors({ // allow different ports to be used
   origin: 'http://localhost:5501',
   methods: ['GET', 'POST'],
