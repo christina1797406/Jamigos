@@ -36,7 +36,7 @@ signUpBtn.addEventListener('click', () => {
         // Redirect to dashboard
         // only works if the files are in the same branch so after merging
         setTimeout(() => {
-          window.location.href = '/index.html';
+          window.location.href = "http://localhost:8080/dashboard.html";
         }, 2500); // after 2.5 seconds
       }
     })

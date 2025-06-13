@@ -1,4 +1,4 @@
-function handleLogin() {
+window.handleLogin = function() {
     const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value;
 
@@ -21,7 +21,7 @@ function handleLogin() {
                     // Redirect to Dashboard only works if the files
                     // are in the same branch so after merging
                     setTimeout(function() {
-                        window.location.href = "http://localhost:5501/index.html";
+                        window.location.href = "http://localhost:8080/dashboard.html";
                     }, 2500); // after 2.5 seconds
 
                 } else if (this.status === 400 || this.status === 401) {
