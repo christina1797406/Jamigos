@@ -92,8 +92,6 @@ button:hover {
   background-color: #5b21b6;
 }
 
-/* Individual mood colors (emoji-based is enough, background is consistent for brand) */
-
 /* Dark Mode */
 .dark-mode {
   background-color: var(--dark-bg);
@@ -127,7 +125,6 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
 }
 
 .hidden {
@@ -141,7 +138,6 @@ button:hover {
   width: 90%;
   max-width: 500px;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .playlist-title {
