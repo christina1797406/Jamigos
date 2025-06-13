@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> feature/user-profile
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -9,10 +5,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-<<<<<<< HEAD
-=======
 var profileRouter = require('./routes/profile-pic'); // for profile
->>>>>>> feature/user-profile
 
 var app = express();
 
@@ -24,8 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-<<<<<<< HEAD
-=======
 require('dotenv').config();
 
 const express = require('express');

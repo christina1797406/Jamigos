@@ -1,26 +1,11 @@
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
   "name": "25s1-wdc-ug-groups-23",
-=======
-  "name": "25s1-wdc-ug-groups-23-2",
->>>>>>> feature/dashboard/streak
-=======
-  "name": "25s1-wdc-ug-groups-23",
->>>>>>> feature/user-profile
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "morgan": "~1.9.1"
-=======
     "axios": "^1.9.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "~1.4.4",
@@ -31,15 +16,9 @@
     "express-session": "^1.18.1",
     "google-auth-library": "^10.1.0",
     "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
     "mysql2": "^3.14.1",
     "spotify-web-api-node": "^5.0.2"
->>>>>>> feature/dashboard/streak
-=======
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "^4.21.2",
-    "morgan": "~1.9.1",
-    "mysql": "^2.18.1"
->>>>>>> feature/user-profile
   }
 }
+
