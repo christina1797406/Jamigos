@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jamigos - Login</title>
+    <script defer src="/javascripts/Login.js"></script>
+    <style>
+        body {
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .input-field {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .login-button {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            text-align: center;
+            background-color: #000;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Jamigos</h1>
+        <h4>Login to your account</h4>
+        <!-- Login to account-->
+        <input id="login-email" type="email" placeholder="Email" class="input-field">
+        <input id="login-password" type="password" placeholder="Password" class="input-field">
+        <button type="button" class="login-button" onclick="handleLogin()">Login</button>
+        <!-- No existing account-->
+        <p class="signup-link">
+            Don't have an account? <a href="accSetUp.html">Sign up here</a>
+        </p>
+    </div>
+</body>
+
+</html>

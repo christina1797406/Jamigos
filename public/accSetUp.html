@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Jamigos - Account Setup</title>
+    <link rel="accSetUp stylesheet" href="/stylesheets/accSetUp.css">
+    <script defer src="/javascripts/accSetup.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script> <!--to load Google Sign-In SDK-->
+    <!--<script src="https://kit.fontawesome.com/3601f111d2.js" crossorigin="anonymous"></script>-->
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-content">
+            <div class="form-content">
+                <h1>Jamigos</h1>
+                <h4> Create an Account</h4>
+                <p class="description">Enter your email to sign up</p>
+
+                <input type="email" placeholder="Email" class="email-input">
+                <input type="text" placeholder="Username" class="username-input">
+                <input type="password" placeholder="Password" class="password-input">
+                <button type="button" class="signup-button">Sign up</button>
+
+                <p id="signup-message"></p>
+                <div class="divider">or</div>
+
+                <!-- Google sign-in div -->
+                <div id="g_id_onload"
+                    data-client_id="815897887308-vvaktps6lldchevenqi5jar8f583gsi9.apps.googleusercontent.com"
+                    data-callback="handleGoogleResponse"
+                    data-auto_prompt="false">
+                </div>
+
+                <div class="g_id_signin"
+                        data-type="standard"
+                        data-size="large"
+                        data-theme="outline"
+                        data-text="continue_with"
+                        data-shape="pill"
+                        data-logo_alignment="left">
+                </div>
+
+                <!-- Terms and Privacy Policy -->
+                <p class="terms">
+                    By clicking continue, you agree to our
+                    <a href="Terms-Policy.html">Terms of Service and Privacy Policy</a>
+                </p>
+
+                <!-- Existing account-->
+                <p class="existing-account">
+                    Already have an account?
+                    <a href="Login.html" class="login-link">Login here</a>
+                </p>
+            </div>
+        </main>
+
+    </div>
+</body>
+
+</html>

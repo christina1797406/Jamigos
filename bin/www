@@ -5,7 +5,11 @@
  */
 
 var app = require('../app');
+<<<<<<< HEAD
 var debug = require('debug')('25s1-wdc-ug-groups-23:server');
+=======
+var debug = require('debug')('25s1-wdc-ug-groups-23-2:server');
+>>>>>>> feature/dashboard/streak
 var http = require('http');
 
 /**
@@ -88,3 +92,12 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+<<<<<<< HEAD
+=======
+
+
+// (async () => {
+//   const topTracks = await getTopTracks();
+//   console.log(topTracks);
+// })();
+>>>>>>> feature/dashboard/streak
