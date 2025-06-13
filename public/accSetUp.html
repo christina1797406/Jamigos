@@ -7,7 +7,6 @@
 
     <title> Jamigos - Account Setup</title>
     <link rel="accSetUp stylesheet" href="/stylesheets/accSetUp.css">
-    <script defer src="/javascripts/accSetup.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script> <!--to load Google Sign-In SDK-->
     <!--<script src="https://kit.fontawesome.com/3601f111d2.js" crossorigin="anonymous"></script>-->
 </head>
@@ -23,7 +22,7 @@
                 <input type="email" placeholder="Email" class="email-input">
                 <input type="text" placeholder="Username" class="username-input">
                 <input type="password" placeholder="Password" class="password-input">
-                <button type="button" class="signup-button">Sign up</button>
+                <button type="button" class="signup-button" onclick="handleSignup()">Sign up</button>
 
                 <p id="signup-message"></p>
                 <div class="divider">or</div>
@@ -59,6 +58,7 @@
         </main>
 
     </div>
+    <script defer src="/javascripts/accSetup.js"></script>
 </body>
 
 </html>

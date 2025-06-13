@@ -5,7 +5,9 @@ const messageEl = document.getElementById('signup-message');
 const signUpBtn = document.querySelector('.signup-button');
 
 // User first-time sign in
-signUpBtn.addEventListener('click', () => {
+signUpBtn.addEventListener('click', handleSignup);
+
+function handleSignup() {
   const email = emailInput.value.trim();
   const username = usernameInput.value.trim();
   const password = passwordInput.value;
@@ -34,7 +36,6 @@ signUpBtn.addEventListener('click', () => {
         passwordInput.value = '';
 
         // Redirect to dashboard
-        // only works if the files are in the same branch so after merging
         setTimeout(() => {
           window.location.href = "http://localhost:8080/dashboard.html";
         }, 2500); // after 2.5 seconds
@@ -45,7 +46,8 @@ signUpBtn.addEventListener('click', () => {
       messageEl.textContent = 'Server error. Try again later.';
       messageEl.style.color = 'red';
     });
-});
+}
+
 
 // Google sign-in setup
 function handleGoogleResponse(res) {
