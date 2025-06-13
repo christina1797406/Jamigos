@@ -1,14 +1,14 @@
 require('dotenv').config();
 var express = require('express');
 var router = express.Router();
+const path = require('path');
 
-/* GET home page.*/
+
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.sendFile(path.join(__dirname, '../public/Login.html'));
 });
 
 const SpotifyWebApi = require('spotify-web-api-node');
-
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.SPOTIFY_CLIENT_ID,
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
