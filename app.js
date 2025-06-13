@@ -19,11 +19,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 require('dotenv').config();
 
-const express = require('express');
 const mysql = require('mysql2');
 const morgan = require('morgan');
 const cors = require('cors');
-const path = require('path');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const SpotifyWebApi = require('spotify-web-api-node');
@@ -32,7 +30,6 @@ const { getLoginUrl, exchangeCodeForToken } = require('./auth');
 const spotifyClient = require('./spotifyClient'); // Spotify helper
 const { getAccessToken } = require('./spotifyClient');
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Paste from previous database.js file (post-merge)
@@ -314,9 +311,7 @@ app.get('/callback', async (req, res) => {
     res.status(500).send('Authentication failed');
   }
 });
->>>>>>> feature/dashboard/streak
-=======
+
 app.use('/profile-pic', profileRouter); // for profile
->>>>>>> feature/user-profile
 
 module.exports = app;

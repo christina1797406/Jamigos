@@ -1,19 +1,12 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> feature/user-profile
+require('dotenv').config();
 var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
-<<<<<<< HEAD
-=======
-require('dotenv').config();
+});
 
-const express = require('express');
-const router = express.Router();
 const SpotifyWebApi = require('spotify-web-api-node');
 
 const spotifyApi = new SpotifyWebApi({
@@ -83,9 +76,5 @@ router.get('/api/trending', async (req, res) => {
     console.error(err);
     res.status(500).send('Failed to get trending albums');
   }
->>>>>>> feature/dashboard/streak
-=======
->>>>>>> feature/user-profile
 });
-
 module.exports = router;
