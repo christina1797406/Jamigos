@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jamigos - User Profile</title>
+  <link rel="stylesheet" href="stylesheets/profile.css">
+  <script defer src="javascripts/profile.js"></script>
+  <script src="https://kit.fontawesome.com/3601f111d2.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- Left Sidebar -->
+  <aside class="sidebar">
+    <h2 class="logo">Jamigos<span class="purple-dot"></span></h2>
+    <nav>
+      <h4>Discover</h4>
+      <ul>
+        <li><i class="fas fa-star"></i> About Us</li>
+        <li><i class="fas fa-home"></i> Dashboard</li>
+        <li><i class="fas fa-compass"></i> Selection Page</li>
+      </ul>
+      <h4>Library</h4>
+      <ul>
+        <li><i class="fas fa-list"></i> My Playlists</li>
+        <li><i class="fas fa-heart"></i> Favourites</li>
+        <li><i class="fas fa-smile"></i> Mood Board</li>
+        <li><i class="fas fa-microphone"></i> Karaoke</li>
+        <li><i class="fas fa-cog"></i> Settings</li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="profile-page">
+    <section class="profile-header">
+      <div class="profile-box"></div>
+
+      <div class="avatar" id="avatar">
+        <span>Profile Pic</span> <!-- fallback initials-->
+        <input type="file" id="avatarInput" accept="image/*" hidden>
+      </div>
+
+      <div class="user-info">
+        <h2>User123</h2>
+        <p>user123@gmail.com</p>
+        <span>10 Followers · 10 Following</span>
+
+        <div class="profile-actions">
+          <button type="button">Edit Profile</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button type="button">My Playlists</button>
+      <button type="button">Favorites</button>
+      <button type="button">Recently Played</button>
+      <button type="button">My Karaoke Moments</button>
+    </div>
+
+
+    <!-- Edit Profile button -->
+    <div class="modal-overlay" id="editModal">
+      <div class="modal">
+        <h3>Edit Profile</h3>
+        <form id="editForm">
+          <label>
+            Username:
+            <input type="text" id="editUsername" required>
+          </label>
+          <label>
+            Email:
+            <input type="email" id="editEmail" required>
+          </label>
+          <label>
+            Profile Picture:
+            <input type="file" id="editProfilePic" accept="image/*">
+          </label>
+          <div class="modal-actions">
+            <button type="submit">Save</button>
+            <button type="button" id="cancelEdit">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+</body>
+
+</html>

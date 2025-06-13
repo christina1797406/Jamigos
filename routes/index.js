@@ -1,10 +1,14 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> feature/user-profile
 var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+<<<<<<< HEAD
 =======
 require('dotenv').config();
 
@@ -80,6 +84,8 @@ router.get('/api/trending', async (req, res) => {
     res.status(500).send('Failed to get trending albums');
   }
 >>>>>>> feature/dashboard/streak
+=======
+>>>>>>> feature/user-profile
 });
 
 module.exports = router;

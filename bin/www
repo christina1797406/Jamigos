@@ -6,10 +6,14 @@
 
 var app = require('../app');
 <<<<<<< HEAD
+<<<<<<< HEAD
 var debug = require('debug')('25s1-wdc-ug-groups-23:server');
 =======
 var debug = require('debug')('25s1-wdc-ug-groups-23-2:server');
 >>>>>>> feature/dashboard/streak
+=======
+var debug = require('debug')('25s1-wdc-ug-groups-23:server');
+>>>>>>> feature/user-profile
 var http = require('http');
 
 /**
@@ -93,6 +97,7 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
@@ -101,3 +106,5 @@ function onListening() {
 //   console.log(topTracks);
 // })();
 >>>>>>> feature/dashboard/streak
+=======
+>>>>>>> feature/user-profile

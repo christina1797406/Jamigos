@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> feature/user-profile
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -6,6 +9,7 @@ body {
 
 a {
   color: #00B7FF;
+<<<<<<< HEAD
 =======
 /* Reset basic */
 * {
@@ -374,4 +378,6 @@ body.dark-mode #theme-button {
     opacity: 0;
   }
 >>>>>>> feature/dashboard/streak
+=======
+>>>>>>> feature/user-profile
 }
