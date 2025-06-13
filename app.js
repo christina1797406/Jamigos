@@ -37,8 +37,8 @@ const PORT = process.env.PORT || 3000;
 // -------- Middleware --------
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(cors({ // allow different ports to be used
-  origin: 'http://localhost:5501',
+app.use(cors({ // Allow for more ports
+  origin: ['http://localhost:8080', 'http://localhost:5501'],
   methods: ['GET', 'POST'],
   credentials: true,
 }));
@@ -89,6 +89,8 @@ app.get('/users', (req, res) => {
 // Route for adding a new user (manually)
 app.post('/addUser', (req, res) => {
   const { email, username, password } = req.body;
+  console.log('Signup request received:', { email, username });
+
   if (!email || !username || !password) return res.status(400).json({ error: 'Missing required fields' }); // Invalid input
 
   // Hash users' password before adding to database
