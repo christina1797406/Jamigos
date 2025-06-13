@@ -160,3 +160,24 @@ window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('theme') || 'dark';
   setTheme(savedTheme);
 });
+
+// Set profile picture in dashboard
+window.addEventListener('DOMContentLoaded', () => {
+  const profilePic = document.getElementById('profile-pic');
+  const localAvatar = localStorage.getItem('avatarPath');
+
+  fetch('/api/user-info')
+    .then(res => res.json())
+    .then(user => {
+      if (profilePic) {
+        profilePic.src =
+          localAvatar || user.avatarPath || '/uploads/default-avatar.png';
+      }
+    })
+    .catch(err => {
+      console.error('Failed to load user info or profile picture:', err);
+      if (profilePic) {
+        profilePic.src = localAvatar || '/uploads/default-avatar.png';
+      }
+    });
+});
