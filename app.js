@@ -6,9 +6,11 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var profileRouter = require('./routes/profile-pic'); // for profile
+const spotifyRouter = require('./routes/spotify');
 
 var app = express();
 
+app.use('/api', spotifyRouter);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -316,5 +318,7 @@ app.get('/callback', async (req, res) => {
 });
 
 app.use('/profile-pic', profileRouter); // for profile
+
+
 
 module.exports = app;

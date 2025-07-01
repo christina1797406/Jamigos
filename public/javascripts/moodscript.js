@@ -1,28 +1,92 @@
- function toggleTheme() {
-      document.body.classList.toggle('dark-mode');
-    }
+ function toggleTheme(){
+    document.body.classList.toggle('dark-mode');
+  }
 
-// mood cards for the mood-playlists and their tags
-// stores a mapping between mood names (like "happy", "chill", etc.)
-// and arrays of related tags (like "Upbeat", "Relaxing", etc.).
-// This is the core data that the program uses to find relevant playlists.
-// playlists with the tags will be searched to retrieve songs on for the new playlist of that mood
-const moodCards = {
-    happy: ['Happy', 'Upbeat', 'Feel Good', 'Cheerful', 'Uplifting', 'Party', 'Summer'],
-    chill: ['Chill', 'Indie', 'Soft', 'Mellow', 'Calm', 'Relaxing', 'Acoustic', 'Laid Back'],
-    energetic: ['Energetic', 'Fast-paced', 'Upbeat', 'Party', 'Summer', 'EDM', 'Rave', 'Energy'],
-    sad: ['Sad', 'Acoustic', 'Piano', 'Slow', 'BreakUp', 'Moody', 'Cry', 'Soft-Rock', 'Unrequited'],
-    romantic: ['Romantic', 'Love', 'Ballads', 'Duets', 'Romance', 'Cute', 'R&B', 'Relationship'],
-    focus: ['Focus', 'Lo-Fi', 'Lofi', 'Study', 'Relaxing', 'Chill', 'Work', 'Concentrate', 'Classical'],
-    confident: ['Confident', 'Confidence', 'Girl Boss', 'Boss', 'Hot', 'Sexy', 'Bad B', 'Baddie'],
-    dreamy: ['Dreamy', 'Ethereal', 'Floaty', 'Chill', 'Soft', 'Piano', 'Acoustic'],
-    angry: ['Angry', 'Active Rock', 'Metal', 'Rage', 'Hard Rock', 'Pissed', 'Scream', 'Crash out'],
-    peaceful: ['Peaceful', 'Piano', 'Acoustic', 'Soft', 'Chill', 'Quiet', 'Calm'],
-    adventurous: ['Adventurous', 'Adventure', 'Epic', 'Fantasy', 'Magical', 'Blockbuster'],
-    sporty: ['Sporty', 'Sport', 'Pumped', 'Workout', 'Gym', 'Hype', 'Energetic', 'Energy', 'Active'],
-    bored: ['Bored', 'Drained', 'Boredom'],
-    downbeat: ['Downbeat', 'Soft', 'Sad', 'Chill', 'Heartbreak', 'Acoustic', 'Slow', 'Drained'],
-    hyper: ['Hyper', 'Active', 'Energy', 'Energetic', 'Dubstep', 'EDM', 'Rave', 'Club'],
-    positive: ['Positive', 'Happy', 'Empowering', 'Feel Good', 'Uplifting', 'Energy'],
+  let selectedMood = null;
+  let songs = [];
+  let playlistCount = 1;
+  const moodSelection = document.querySelectorAll('.mood-card');
+  moodSelection.forEach(function(moodCard){
+    moodCard.addEventListener('click', function(){
+        moodSelection.forEach(function(c){
+            c.classList.remove('selected');
+        });
+        moodCard.classList.add('selected');
+        selectedMood = moodCard.getAttribute('data-mood');
+    });
+  });
+
+  function showSongs(){
+    const songList = document.getElementById('songList');
+    songList.innerHTML = "";
+    if(songs.length === 0){
+        songList.innerHTML = "<p>No songs in this playlist.</p>";
+        return;
+    }
+    songs.forEach((song, index) => {
+        const albumHTML = song.albumCover ? `<img src = "${song.albumCover}" alt="Album cover"` : '';
+        const songItem = document.createElement("div");
+        songItem.innerHTML = `
+            ${albumCover}
+            <div class "song-info">
+                <div class = "song-title">${song.title}</div>
+                <div class = song-artist">${song.artist}</div>
+            </div>
+            <button type = button class "remove">-</button>
+        `;
+        songItem.querySelector('.remove').onclick = () => {
+            songs.splice(index, 1);
+            showSongs();
+        };
+        songList.appendChild(songItem);
+    });
+  }
+
+  async function generatePlaylist(count = 10, append = false){
+    if(!selectedMood){
+        alert("Please select mood first.");
+        return;
+    }
+    try {
+        const res = await fetch(`/api/mood-playlist?mood=${selectedMood}`);
+        if(!res.ok){
+            throw new Error("Failed to fetch playlist");
+        }
+        const newSongs = await res.json();
+        if(!append){
+            songs = newSongs;
+            document.getElementById('playlistTitle').value = `Playlist ${playlistCount}`;
+        }else{
+            songs.push(...newSongs);
+        }
+        showSongs();
+        document.getElementById('playlistModal').style.display = "flex";
+    } catch (err){
+        console.error(err);
+        alert('Oops, something went wrong. Please try again.');
+    }
+  }
+//when the button for closePlaylist is clicked then the preview of the playlist becomes hidden
+function closePlaylist(){
+  document.getElementById('playlistModal').style.display = "none";
+}
+document.getElementById('savePlaylistBtn').onclick = function(){
+    const title = document.getElementById('playlistTitle').value.trim();
+    if(!title){
+        alert("Please enter playlist name");
+        return;
+    }
+    alert(`${title} saved!`);
+    closePlaylist();
+    playlistCount++;
 };
+//when users press the more songs button, 10 more songs are appended on to the playlist
+
+document.getElementById("moreSongsBtn").onclick = function(){
+  generatePlaylist(10, true);
+};
+
+
+
+
 
