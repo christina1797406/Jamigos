@@ -10,6 +10,13 @@
 // and I need to try and add the playlists to the database so users can access them later
 // And working out how to play the songs would be good as well but I need to work out how to do that
 
+// I appologise for the ammount of comments I included.
+// I tend to add comments to explain my thought process and also never know how much or where to put
+// comments for assessments so I often overdo it
+// I also often write the comments before writing the code or getting the code working as a plan for
+// what I want the code to do. I also wanted to show you where I am at with my code and what I
+// still need to work on
+
 // function toggles light and dark mode on and off
 // when toggle theme button is pressed (via an onlick event)
  function toggleTheme(){
@@ -21,15 +28,12 @@
   let songs = [];
   // sets the playlist count to 1 instead of 0 as the first playlist the user created should have
   // a value of 1 signalling that it is their first playlist
-  // the playlist count will increment everytime they save a new playlist
   let playlistCount = 1;
-  // selects all the elements with the class mood-card
-  const moodSelection = document.querySelectorAll('.mood-card');
   // adds a click event listener to all of the mood-cards
+  const moodSelection = document.querySelectorAll('.mood-card');
   moodSelection.forEach(function(moodCard){
     moodCard.addEventListener('click', function(){
-        // removes the selected class from the mood cards
-        // making sure all mood cards are deselected
+        // makes sure all mood cards are deselected
         moodSelection.forEach(function(deselect){
             deselect.classList.remove('selected');
         });
@@ -75,7 +79,6 @@
         // function removes song from the playlist
         const removeBtn = songItem.querySelector('.remove');
         removeBtn.addEventListener('click', function(){
-            // removes the song (1 item) from the song at the current index
             songs.splice(index, 1);
             // re-rendering the song list (by calling the function again) updates the UI
             // to remove the song that was removed from the songs array
@@ -90,10 +93,7 @@
   // it essentially retrieves random playlists from spotify matching the selected mood
   // and from those playlists it retrives random songs from the playlists
   // and adds them to this newly generated playlist which is then shown on the screen via showSongs
-  // it shows 20 songs
-  async function generatePlaylist(count = 20, append = false){
-    // if the user fails to select a mood before pressing generate playlist
-    // it displays an alert message asking the user to select a mood first and exits the function
+  async function generatePlaylist(append = false){
     if(!selectedMood){
         alert("Please select mood first.");
         return;
@@ -102,17 +102,15 @@
         // sends a GET request to the spotify endpoint established in the backend (spotify.js)
         // with selected mood acting as the query paramater
         // The backend will then call spotify api and return a list of songs based on the mood
-        const res = await fetch(`/api/mood-playlist?mood=${selectedMood}&count=${count}`);
+        const res = await fetch(`/api/mood-playlist?mood=${selectedMood}`);
         const newSongs = await res.json();
         if(!append){
             // if a new playlist is being generated (not appending)
             // replace the songs in the current playlist with new songs as it is a new playlist
             songs = newSongs;
-            // sets a new playlist title in the input field (the current playlist count)
-            // users will be able to edit it to create their own playlist title
             document.getElementById('playlistTitle').value = `Playlist ${playlistCount}`;
         }else{
-            // merges the array of new songs into the pre existing song array (at the end)
+            // merges the array of new songs into the pre existing song array at the end
             songs.push(...newSongs);
         }
         // shows the preview playlist and calls the showSongs function to display the playlist songs
@@ -123,7 +121,7 @@
     // helped a lot during testing
     } catch (err){
         console.error(err);
-        alert('Oops, something went wrong. Please try again.');
+        alert('Error occured. Please try again.');
     }
   }
 
@@ -136,10 +134,8 @@ function closePlaylist(){
 // (still need to add code for that)
 function savePlaylist(){
     const title = document.getElementById('playlistTitle').value.trim();
-    // if the input text field used for the playlist title is empty
-    // then alert the user that they need to name the playlist in order to save it
-    // and stop the function
-    if(title === " " || title === null){
+    // the playlist needs a name for the user to save it
+    if(!title){
         alert("Please enter playlist name");
         return;
     }
@@ -155,12 +151,12 @@ function savePlaylist(){
 }
 
 // when users press the more songs button, 10 more songs are appended on to the playlist
-// currently this function doesn't work properly as it adds the same 10 songs to the playlist
+// currently this function doesn't work properly as it adds the same songs to the playlist
 // i need to randomise it
 document.getElementById("moreSongsBtn").onclick = function(){
     // calls generate playlist function taking in count = 10, append = true as it's parameters
     // this adds 10 songs to the playlist
-    generatePlaylist(10, true);
+    generatePlaylist(true);
 };
 
 

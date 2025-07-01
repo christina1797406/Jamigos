@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const express = require('express');
 const router = express.Router();
 const spotifyApi = require('../spotifyClient'); // Adjust path if needed
@@ -48,6 +49,8 @@ router.get('/mood-playlist', async(req, res) => {
   if(!req.query.mood){
     return res.status(400).json({error: 'Mood is required'});
   }
+  // 20 songs will always be added to the playlist when the user generates the playlist
+  const count = 20;
 
   try {
     // used official method of making spotify api calls as illustrated in the Spotify Web API documentation
@@ -55,35 +58,34 @@ router.get('/mood-playlist', async(req, res) => {
     let accessToken = await spotifyApi.getAccessToken();
     // uses the search playlists spotify endpoint taking in mood as its query (the mood the user selected)
     // playlist as the type and the limit (number of playlists being searched) as 5
-    const searchResponse = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(req.query.mood)}&type=playlist&limit=5`,
+    var searchResponse = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(req.query.mood)}&type=playlist&limit=5`,
     { headers: { Authorization: 'Bearer ' + accessToken}});
     // if search response is not okay it sends a 500 sever error
     if(!searchResponse.ok){
       return res.status(500).json({error: 'Spotify failed' });
     }
-    // extracts the playlist items 
+    // extracts the playlist items
     const searchData = await searchResponse.json();
-    playlists = searchData.playlists?.items;
+    var playlists = searchData.playlists.items;
     // used for testing as at first was not recieving playlists
     // displays the number of playlists recieved on the console
     console.log(`Found ${playlists.length} playlists`);
     var songs = [];
     // loop through each playlist found
-    for(const playlist of playlists){
+    for(var playlist of playlists){
       // skips to the next playlist if the current playlist is underfined, doesn't have songs or private
       if(!playlist) continue;
       // again uses the official method of making spotify api calls as illustrated in the Spotify Web API documentation
       // this time retrieves the tracks from the playlist
-      const trackResults = await fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`,
+      var trackResults = await fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`,
       {headers: {Authorization: 'Bearer ' + accessToken}});
-      const trackData = await trackResults.json();
+      var data = await trackResults.json();
       // struggled with this. This is what the group had been doing with the other endpoints
-      var tracks = trackData.items
-        .map(item => {
-          const track = item.track;
+      var tracks = data.items.map(item => {
+          var track  = item.track;
             return{
               title: track.name,
-              artist: track.artists.map((a) => a.name).join('', ''),
+              artist: track.artists.map((a) => a.name).join(', '),
               albumCover: (track.album.images && track.album.images[0] && track.album.images[0].url) || null,
               url: track.external_urls.spotify,
             };
@@ -91,7 +93,7 @@ router.get('/mood-playlist', async(req, res) => {
           // adds the songs from the tracks array to the end of the songs array
           songs = songs.concat(tracks);
           // stop searching playlists and break the loop if the length of the playlist reaches the count
-          if(songs.length >= req.query.count) break;
+          if(songs.length >= count) break;
       }
     res.json(songs);
   } catch(err){
