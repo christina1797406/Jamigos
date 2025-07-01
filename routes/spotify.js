@@ -44,31 +44,47 @@ router.get('/api/trending-tracks', async (req, res) => {
 router.get('/mood-playlist', async(req, res) => {
   const { mood }= req.query;
   const count = 10;
+  console.log('Mood recieved: ', mood);
 
   if(!mood){
     return res.status(400).json({error: 'Mood is required'});
   }
 
   try {
-    const searchResponse = await fetch(`https://api.spotify.com/v1/search?q=${mood}&type=playlist&limit=5`,
+    const accessToken = await spotifyApi.getAccessToken();
+    console.log('AccessToken: ', accessToken);
+    const searchResponse = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(mood)}&type=playlist&limit=5`,
     { headers: { Authorization: 'Bearer ' + accessToken}});
 
-    const searchResult = await spotifyApi.searchPlaylists(mood);
-    playlists = searchResult.playlists?.items || [];
+    if(!searchResponse.ok){
+      const errorBod = await searchResponse.text();
+      console.error('API failed:', searchResponse.status, errorBod);
+      return res.status(500).json({error: 'Spotify failed' });
+
+    }
+
+    const searchData = await searchResponse.json();
+    console.log('Spotify search raw response: ', JSON.stringify(searchData, null, 2));
+    playlists = searchData.playlists?.items || [];
+    console.log(`Found ${playlists.length} playlists`);
     const songs = [];
     const trackIds = new Set();
 
-    for(const playlist of playlists){
+    for(const playlist of searchData.playlists?.items || []){
+      if(!playlist) continue;
       const trackResults = await fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`,
       {headers: {Authorization: 'Bearer ' + accessToken}});
       const trackData = await trackResults.json();
-      for(const item of trackData.items){
+      console.log(`Found ${trackData.items?.length} tracks`);
+      for(const item of trackData.items || []){
         const { track } = item;
         if(track){
           if(!trackIds.has(track.id)){
+            trackIds.add(track.id);
             songs.push({
             title: track.name,
             artist: track.artists.map((a) => a.name).join(", "),
+            albumCover: track.album?.images?.[0].url || null,
           });
           if(songs.length >= count) break;
         }

@@ -24,15 +24,15 @@
         return;
     }
     songs.forEach((song, index) => {
-        const albumHTML = song.albumCover ? `<img src = "${song.albumCover}" alt="Album cover"` : '';
+        const albumHTML = song.albumCover ? `<img src = "${song.albumCover}" alt="Album cover">` : '';
         const songItem = document.createElement("div");
         songItem.innerHTML = `
-            ${albumCover}
-            <div class "song-info">
-                <div class = "song-title">${song.title}</div>
-                <div class = song-artist">${song.artist}</div>
+            ${albumHTML}
+            <div class="song-info">
+                <div class ="song-title">${song.title}</div>
+                <div class =song-artist">${song.artist}</div>
             </div>
-            <button type = button class "remove">-</button>
+            <button type ="button" class="remove">-</button>
         `;
         songItem.querySelector('.remove').onclick = () => {
             songs.splice(index, 1);
