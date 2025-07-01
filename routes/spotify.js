@@ -45,7 +45,7 @@ router.get('/mood-playlist', async(req, res) => {
   // checks if mood was correctly recieved from the front end (helped during testing)
   console.log('Mood recieved: ', req.query.mood);
   // if mood is underfined it sends a 400 bad request error
-  if(!mood){
+  if(!req.query.mood){
     return res.status(400).json({error: 'Mood is required'});
   }
 
@@ -61,13 +61,13 @@ router.get('/mood-playlist', async(req, res) => {
     if(!searchResponse.ok){
       return res.status(500).json({error: 'Spotify failed' });
     }
+    // extracts the playlist items 
     const searchData = await searchResponse.json();
     playlists = searchData.playlists?.items;
     // used for testing as at first was not recieving playlists
     // displays the number of playlists recieved on the console
     console.log(`Found ${playlists.length} playlists`);
-    const songs = [];
-    const trackIds = new Set();
+    var songs = [];
     // loop through each playlist found
     for(const playlist of playlists){
       // skips to the next playlist if the current playlist is underfined, doesn't have songs or private
@@ -90,7 +90,7 @@ router.get('/mood-playlist', async(req, res) => {
         });
           // adds the songs from the tracks array to the end of the songs array
           songs = songs.concat(tracks);
-          // stop searching playlists and break the loop
+          // stop searching playlists and break the loop if the length of the playlist reaches the count
           if(songs.length >= req.query.count) break;
       }
     res.json(songs);

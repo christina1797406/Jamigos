@@ -1,5 +1,15 @@
 /* eslint-disable no-unused-vars */
 
+// So far I have managed to successfully generate a playlist full of songs
+// gathered from spotify playlists relating the the selected mood
+// However I need to work on random generation as every time i select the same mood
+// to generate a playlist with, i recieve the exact same songs in the playlist
+// I also need to find a way to stop repeats
+// Also when I press the add more songs button the same songs get added to the playlist
+// so I need to fix that as well
+// and I need to try and add the playlists to the database so users can access them later
+// And working out how to play the songs would be good as well but I need to work out how to do that
+
 // function toggles light and dark mode on and off
 // when toggle theme button is pressed (via an onlick event)
  function toggleTheme(){
