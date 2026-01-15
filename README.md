@@ -2,7 +2,6 @@
 
 **Jamigos** is a social music web application designed to help users discover and enjoy music tailored to their mood and preferences. It integrates with the [Spotify Web API](https://developer.spotify.com/documentation/web-api) to dynamically generate playlists, allows light/dark mode toggling, and includes social sharing features to enhance the user experience. It also uses the [Google OAuth API](https://developers.google.com/identity/protocols/oauth2) to allow users to easily register with their Google accounts.
 
-To access the full-feature implementation, please switch to the `dev` branch, where all major updates and features have been merged.
 
 📹 **View 8-minute presentation video:** https://youtu.be/ul-9M7I4j_8
 
